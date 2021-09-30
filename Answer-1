@@ -1,0 +1,17 @@
+import sys
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+import io
+
+
+url = 'https://raw.githubusercontent.com/Bungeetech/internship-test2/master/input/question-1/main.csv'
+df = pd.read_csv(io.StringIO(url), sep="[;,]", engine='python')
+print(df)
+
+dates = pd.date_range('1/1/2001', periods=500, freq="M")
+df = pd.DataFrame({"A": 5*np.arange(len(dates))+2}, index=dates)
+df.head()
+
+df.groupby(df.index.year).sum().head()
+df.groupby((df.index.year//10)*10).sum()
